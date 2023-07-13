@@ -2,34 +2,39 @@ package helpers
 
 import (
 	"encoding/json"
+	"math/rand"
 	"net/http"
 	"os"
-	"strings"
+	"regexp"
 )
-
-// GetURLPath returns value after the first "/" symbol
-func GetURLPath(r *http.Request) string {
-	p := strings.Split(r.URL.Path[1:], "/")
-
-	// get rid of empty strings
-	result := []string{}
-	for _, i := range p {
-		if i != "" {
-			result = append(result, string(i))
-		}
-	}
-
-	if len(result) > 1 {
-		return strings.ToLower(result[1]) // converting to lowercase
-	}
-
-	return ""
-}
 
 // WriteJSON writes JSON to ResponseWriter with encoding of v
 func WriteJSON(w http.ResponseWriter, s int, v any) {
 	w.WriteHeader(s)
 	json.NewEncoder(w).Encode(v)
+}
+
+// ValidateUrl takes the url and returns a valid one
+func ValidateUrl(url string) string {
+	var validUrl = regexp.MustCompile("^(http|https)://")
+
+	if !validUrl.MatchString(url) {
+		url = "http://" + url
+	}
+
+	return url
+}
+
+// GenerateRandomHash returns a random 6 character string
+func GenerateRandomHash() string {
+	var chars = []rune("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+	s := make([]rune, 6)
+	for i := range s {
+		s[i] = chars[rand.Intn(len(chars))]
+	}
+
+	return string(s)
 }
 
 // hide directory listings in http.FileServer using a custom filesystem

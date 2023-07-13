@@ -1,26 +1,21 @@
-// most of the code is taken from:
-//
-// https://github.com/chromedp/examples
 package service
 
 import (
 	"context"
 	"fmt"
 	"log"
-	"math/rand"
 	"os"
-	"regexp"
 
 	"github.com/chromedp/chromedp"
+	"github.com/hatredholder/Screenshot-API/common/helpers"
 )
 
 // ScreenshotWebsite takes the url, captures the screen
 // and returns the file name
 func ScreenshotWebsite(url string) (string, error) {
 	// validate the url
-	url = validateUrl(url)
+	url = helpers.ValidateUrl(url)
 
-	// create context
 	ctx, cancel := chromedp.NewContext(
 		context.Background(),
 	)
@@ -28,7 +23,7 @@ func ScreenshotWebsite(url string) (string, error) {
 
 	var buf []byte
 
-	hash := generateRandomHash()
+	hash := helpers.GenerateRandomHash()
 	fileName := fmt.Sprintf("%s.png", hash)
 
 	// capture entire browser viewport, returning png
@@ -51,27 +46,4 @@ func fullScreenshot(urlstr string, quality int, res *[]byte) chromedp.Tasks {
 		chromedp.Navigate(urlstr),
 		chromedp.FullScreenshot(res, quality),
 	}
-}
-
-// validateUrl takes the url and returns a valid one
-func validateUrl(url string) string {
-	var validUrl = regexp.MustCompile("^(http|https)://")
-
-	if !validUrl.MatchString(url) {
-		url = "http://" + url
-	}
-
-	return url
-}
-
-// generateRandomHash returns a random 6 character string
-func generateRandomHash() string {
-	var chars = []rune("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-	s := make([]rune, 6)
-	for i := range s {
-		s[i] = chars[rand.Intn(len(chars))]
-	}
-
-	return string(s)
 }
