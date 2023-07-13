@@ -18,7 +18,7 @@ func StorageHandler() http.Handler {
 }
 
 // ScreenshotWebsiteHandler is a handler function
-// the main service of the API
+// wiht the main service of the API
 func ScreenshotWebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.Query().Get("url")
 
