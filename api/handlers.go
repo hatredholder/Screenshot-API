@@ -32,7 +32,7 @@ func ScreenshotWebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	screenshotResp := types.ScreenshotResponse{
-		ScreenshotURL: fmt.Sprintf(r.Host + "/storage/" + fileName),
+		ScreenshotURL: fmt.Sprint(r.Host + "/storage/" + fileName),
 	}
 
 	helpers.WriteJSON(w, http.StatusOK, &screenshotResp)
