@@ -21,7 +21,7 @@
 
 # :wrench: Installation
 
-Before running anything you need to make sure you have [Docker](https://www.docker.com/) installed.
+Before running anything, you need to make sure you have [Docker](https://www.docker.com/) installed.
 
 1. Build a **Docker** container with:
 ```
