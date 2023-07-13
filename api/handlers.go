@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/hatredholder/screenshot-generator/common/helpers"
-	"github.com/hatredholder/screenshot-generator/common/types"
-	"github.com/hatredholder/screenshot-generator/service"
+	"github.com/hatredholder/Screenshot-API/common/helpers"
+	"github.com/hatredholder/Screenshot-API/common/types"
+	"github.com/hatredholder/Screenshot-API/service"
 )
 
 // StorageHandler returns custom FileServer handler

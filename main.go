@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/hatredholder/screenshot-generator/api"
+	"github.com/hatredholder/Screenshot-API/api"
 )
 
 func main() {

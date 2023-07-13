@@ -1,4 +1,4 @@
-module github.com/hatredholder/screenshot-generator
+module github.com/hatredholder/Screenshot-API
 
 go 1.20
 
