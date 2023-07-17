@@ -31,6 +31,7 @@ func ScreenshotWebsite(url string) (string, error) {
 		return "", err
 	}
 
+	// write a file to /tmp/
 	if err := os.WriteFile(fmt.Sprintf("/tmp/%s", fileName), buf, 0o644); err != nil {
 		return "", err
 	}
