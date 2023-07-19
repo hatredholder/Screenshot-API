@@ -6,20 +6,20 @@ import (
 	"github.com/hatredholder/Screenshot-API/service"
 )
 
-func TestScreenshotRealWebsite(T *testing.T) {
+func TestScreenshotRealWebsite(t *testing.T) {
 	_, err := service.ScreenshotWebsite("google.com")
 	if err != nil {
-		T.Error(err)
+		t.Error(err)
 	}
 }
 
-func TestScreenshotFakeWebsite(T *testing.T) {
+func TestScreenshotFakeWebsite(t *testing.T) {
 	_, err := service.ScreenshotWebsite("anActuallyFakeWebsite.com")
 
 	got := err.Error()
 	want := "page load error net::ERR_NAME_NOT_RESOLVED"
 
-	if got != want {
-		T.Error(err)
+	if want != got {
+		t.Errorf("expected: %v, got: %v", want, got)
 	}
 }
