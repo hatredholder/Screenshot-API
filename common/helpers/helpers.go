@@ -8,10 +8,12 @@ import (
 	"regexp"
 )
 
-// WriteJSON writes JSON to ResponseWriter with encoding of v
-func WriteJSON(w http.ResponseWriter, s int, v any) {
-	w.WriteHeader(s)
-	json.NewEncoder(w).Encode(v)
+// WriteJSON writes header statuscode of sc,
+// encodes JSON to ResponseWriter with encoding of v,
+// followed by a newline character
+func WriteJSON(rw http.ResponseWriter, sc int, v any) {
+	rw.WriteHeader(sc)
+	json.NewEncoder(rw).Encode(v)
 }
 
 // ValidateUrl takes the url and returns a valid one
