@@ -45,7 +45,7 @@ type NoListFileSystem struct {
 	Fsys http.FileSystem
 }
 
-// Open hides directories by returning os.ErrNotExist if file is a directory
+// Open hides directory listings by returning os.ErrNotExist if file is a directory
 func (fs NoListFileSystem) Open(name string) (http.File, error) {
 	file, err := fs.Fsys.Open(name)
 	if err != nil {
