@@ -10,7 +10,7 @@ import (
 	"github.com/hatredholder/Screenshot-API/common/types"
 )
 
-func TestWriteJSON(t *testing.T) {
+func TestWriteJSONStatusCode(t *testing.T) {
 	rr := httptest.NewRecorder()
 	v := types.ScreenshotResponse{
 		ScreenshotURL: "test",
@@ -18,17 +18,28 @@ func TestWriteJSON(t *testing.T) {
 
 	helpers.WriteJSON(rr, http.StatusOK, v)
 
-	if status := rr.Code; status != http.StatusOK {
-		t.Fatalf("unexpected status code: got %v want %v",
-			status, http.StatusOK)
+	want := http.StatusOK
+	got := rr.Code
+
+	if want != got {
+		t.Errorf("expected: %v, got: %v", want, got)
+	}
+}
+
+func TestWriteJSONBody(t *testing.T) {
+	rr := httptest.NewRecorder()
+	v := types.ScreenshotResponse{
+		ScreenshotURL: "test",
 	}
 
-	// WriteJSON encodes JSON to the stream, followed by a newline character
-	expected := `{"screenshotUrl":"test"}` + "\n"
+	helpers.WriteJSON(rr, http.StatusOK, v)
 
-	if body := rr.Body.String(); body != expected {
-		t.Errorf("unexpected body: got %v want %v",
-			rr.Body.String(), expected)
+	// WriteJSON encodes JSON to the stream, followed by a newline character
+	want := `{"screenshotUrl":"test"}` + "\n"
+	got := rr.Body.String()
+
+	if want != got {
+		t.Errorf("expected: %v, got: %v", want, got)
 	}
 }
 
