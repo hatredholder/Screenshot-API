@@ -14,7 +14,10 @@ func TestScreenshotRealWebsite(t *testing.T) {
 }
 
 func TestScreenshotFakeWebsite(t *testing.T) {
-	_, err := service.ScreenshotWebsite("anActuallyFakeWebsite.com")
+	_, err := service.ScreenshotWebsite("google.com.fake")
+	if err == nil {
+		t.Fatal("no error was returned for fake website")
+	}
 
 	got := err.Error()
 	want := "page load error net::ERR_NAME_NOT_RESOLVED"
