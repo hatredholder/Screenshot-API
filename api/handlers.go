@@ -9,8 +9,8 @@ import (
 	"github.com/hatredholder/Screenshot-API/service"
 )
 
-// StorageHandler returns custom FileServer handler
-// with /tmp directory as the filesystem
+// StorageHandler returns FileServer handler
+// with custom filesystem and /tmp as it's directory
 func StorageHandler() http.Handler {
 	return http.StripPrefix("/storage/", http.FileServer(
 		helpers.NoListFileSystem{Fsys: http.Dir("/tmp")},
@@ -18,7 +18,7 @@ func StorageHandler() http.Handler {
 }
 
 // ScreenshotWebsiteHandler is a handler function
-// wiht the main service of the API
+// with the main service of the API
 func ScreenshotWebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.Query().Get("url")
 

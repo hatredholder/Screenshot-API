@@ -34,7 +34,7 @@ func TestWriteJSONBody(t *testing.T) {
 
 	helpers.WriteJSON(rr, http.StatusOK, v)
 
-	// WriteJSON encodes JSON to the stream, followed by a newline character
+	// WriteJSON adds a newline character
 	want := `{"screenshotUrl":"test"}` + "\n"
 	got := rr.Body.String()
 
