@@ -6,14 +6,14 @@ import (
 	"github.com/hatredholder/Screenshot-API/service"
 )
 
-func TestScreenshotRealWebsite(t *testing.T) {
+func TestScreenshotWebsiteSuccess(t *testing.T) {
 	_, err := service.ScreenshotWebsite("google.com")
 	if err != nil {
 		t.Error(err)
 	}
 }
 
-func TestScreenshotFakeWebsite(t *testing.T) {
+func TestScreenshotWebsiteFailure(t *testing.T) {
 	_, err := service.ScreenshotWebsite("google.com.fake")
 	if err == nil {
 		t.Fatal("no error was returned for fake website")
