@@ -41,7 +41,7 @@ func TestScreenshotWebsiteHandlerBodySuccess(t *testing.T) {
 
 	if !strings.Contains(rr.Body.String(), "screenshotUrl") {
 		t.Errorf(
-			`expected: %s to contain: screenshotUrl`,
+			"expected: %s to contain: screenshotUrl",
 			rr.Body.String(),
 		)
 	}
@@ -60,8 +60,17 @@ func TestScreenshotWebsiteHandlerBodyFailure(t *testing.T) {
 
 	if !strings.Contains(rr.Body.String(), "error") {
 		t.Errorf(
-			`expected: %s to contain: error`,
+			"expected: %s to contain: error",
 			rr.Body.String(),
 		)
+	}
+}
+
+func TestNewServerAddress(t *testing.T) {
+	want := "3000"
+	got := api.NewServer("3000").Addr
+
+	if want != got {
+		t.Errorf("expected: %v, got: %v", want, got)
 	}
 }
