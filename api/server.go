@@ -14,10 +14,10 @@ func NewServeMux() *http.ServeMux {
 }
 
 func NewServer(addr string) *http.Server {
-	sm := NewServeMux()
+	handler := NewServeMux()
 
 	return &http.Server{
 		Addr:    addr,
-		Handler: sm,
+		Handler: handler,
 	}
 }
